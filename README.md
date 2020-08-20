@@ -1,6 +1,6 @@
-# Docker Python Waitress
+# Python Waitress Docker Container
 
-Docker container to run a WSGI Python app using
+A Docker container to run a WSGI Python application using
 [Waitress](https://docs.pylonsproject.org/projects/waitress/en/stable/index.html). Images support python 3.6+ and are
 based on the [official python containers](https://hub.docker.com/_/python). The `-slim` versions are based on the similarly named python versions.
 
@@ -36,14 +36,14 @@ All options can be set using environment variables. These can be passed either i
 -e flag to the docker call.
 
 ### Prestart Script
-If you need to run any startup commands before waitress runs (an example might be running migrations) you can override the `prestart.sh` script. This script should live within the `/app` directory in the container. The image will automatically detect and run it before starting waitress.
+If you need to run any startup commands before Waitress runs (an example might be running migrations) you can override the `prestart.sh` script. This script should live within the `/app` directory in the container. The image will automatically detect and run it before starting Waitress.
 
 
 ### Variables
 
 #### `MODULE_NAME`
 
-The Python "module" (file) to be imported by Gunicorn, this module would contain the actual application in a variable.
+The Python "module" (file) to be imported by Waitress, this module would contain the actual application in a variable.
 
 By default:
 
@@ -83,7 +83,7 @@ docker run -d -p 80:80 -e VARIABLE_NAME="api" myimage
 
 #### `APP_MODULE`
 
-The string with the Python module and the variable name passed to Gunicorn.
+The string with the Python module and the variable name passed to Waitress.
 
 By default, set based on the variables `MODULE_NAME` and `VARIABLE_NAME`:
 
@@ -98,29 +98,33 @@ docker run -d -p 80:80 -e APP_MODULE="custom_app.custom_script:api" myimage
 
 ### Waitress Options
 
-#### Host and Port
+#### Host & Port Setup
 By default, Waitress has been setup to server on all hostnames on port 80 using both IPv4 and IPv6. This translates to `--listen:*:80`. This works for most applications using the basic setups listed above.
 
 You may have different needs so you can adjust and manipulate this by passing in environment variable to adjust the settings.
 
 There are 2 options for doing this.
 1. Pass a comma separated list of `host:port,host:port` to the `WAITRESS_LISTEN` param
-2. Pass the host and port separately as `WAITRESS_HOST` and/or `WAITRESS_PORT`. If port is left out, it will default to 80.
 
 The `WAITRESS_LISTEN` param takes precedence over `WAITRESS_HOST`/`WAITRESS_PORT` options, meaning if you include all 3, host and port settings will be ignored.
 
-##### Some examples
+To set Waitress to use port 8080, sent the `WAITRESS_LISTEN` param like 
+```bash
+docker run -d -p 80:8080 -e WAITRESS_LISTEN=*:8080 myimage
+````
 
-To set waitress to use port 8080, sent the `WAITRESS_LISTEN` param like `-e WAITRESS_LISTEN=*:8080`
+2. Pass the host and port separately as `WAITRESS_HOST` and/or `WAITRESS_PORT`. If port is left out, it will default to 80.
 
-If you want only IPv4, you could use advanced param listed in the section below, but you could also use `-e WAITRESS_HOST=0.0.0.0 -e WAITRESS_PORT=80`
-
+If you want only IPv4, you could use advanced param listed in the section below, but you could also use
+```bash
+docker run -d -p 80:8080 -e WAITRESS_HOST=0.0.0.0 -e WAITRESS_PORT=8080 myimage
+````
 
 #### Advanced Options
 
 Many of the
-[supported options by waitress-serve](https://docs.pylonsproject.org/projects/waitress/en/stable/runner.html#invocation)
-are also supported by passing in environment variables. These params are only included in the call if they are included
+[options](https://docs.pylonsproject.org/projects/waitress/en/stable/runner.html#invocation) that can be passed to `waitress-serve` 
+can also supported by passing in environment variables. These params are only included in the call if they are included
 in the environment. The supported options are:
 
 | Environment Variable             | Waitress Param                   |
@@ -139,13 +143,23 @@ in the environment. The supported options are:
 | WAITRESS_ASYNCORE_LOOP_TIMEOUT   | --asyncore_loop_timeout=`$VAL`   |
 | WAITRESS_ASYNCORE_USE_POLL       | --asyncore_use_poll=`$VAL`       |
 
-Where `$VAL` is the value passed into the environment.
-For example to pass in 5 threads, use `-e WAITRESS_THREADS=5`
+Where `$VAL` is the value passed into the environment. For example, to set the number of threads to 5 use:
+```bash
+docker run -d -p 80:80 -e WAITRESS_THREADS=5 myimage
+````
 
-For those without any value, simply pass a 1.
-For example to turn off IPv6, use `-e WAITRESS_NO_IPV6=1`
+For those without any value, simply pass a 1. For example, to turn off IPv6 use:
+```bash
+docker run -d -p 80:80 -e WAITRESS_NO_IPV6=1 myimage
+````
 
 # Credits
 This dockerfile setup is based on https://github.com/tiangolo/meinheld-gunicorn-docker
 
 Waitress is one of the Pylons projects: https://pylonsproject.org
+
+Python is by the Python Software Foundation. https://python.org
+
+Docker is by Docker, Inc. https://docker.com
+
+Built using open source software.
