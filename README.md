@@ -103,7 +103,9 @@ By default, Waitress has been setup to server on all hostnames on port 80 using 
 
 You may have different needs so you can adjust and manipulate this by passing in environment variable to adjust the settings.
 
-There are 2 options for doing this.
+There are 2 options for doing this:
+
+
 1. Pass a comma separated list of `host:port,host:port` to the `WAITRESS_LISTEN` param
 
 The `WAITRESS_LISTEN` param takes precedence over `WAITRESS_HOST`/`WAITRESS_PORT` options, meaning if you include all 3, host and port settings will be ignored.
@@ -124,7 +126,7 @@ docker run -d -p 80:8080 -e WAITRESS_HOST=0.0.0.0 -e WAITRESS_PORT=8080 myimage
 
 Many of the
 [options](https://docs.pylonsproject.org/projects/waitress/en/stable/runner.html#invocation) that can be passed to `waitress-serve` 
-can also supported by passing in environment variables. These params are only included in the call if they are included
+are supported by passing in environment variables. These params are only included in the `waitress-serve` call if they are present
 in the environment. The supported options are:
 
 | Environment Variable             | Waitress Param                   |
@@ -146,12 +148,21 @@ in the environment. The supported options are:
 Where `$VAL` is the value passed into the environment. For example, to set the number of threads to 5 use:
 ```bash
 docker run -d -p 80:80 -e WAITRESS_THREADS=5 myimage
-````
+```
+Translates to command
+```bash
+waitress-serve --listen=*:80 --threads=5 app.wsgi:application
+```
+
 
 For those without any value, simply pass a 1. For example, to turn off IPv6 use:
 ```bash
 docker run -d -p 80:80 -e WAITRESS_NO_IPV6=1 myimage
-````
+```
+Translates to command
+```bash
+waitress-serve --listen=*:80 --no-ipv6 app.wsgi:application
+```
 
 # Credits
 This dockerfile setup is based on https://github.com/tiangolo/meinheld-gunicorn-docker
