@@ -1,4 +1,4 @@
-FROM python:slim
+FROM python:latest
 
 RUN pip install pip waitress --upgrade
 
