@@ -2,7 +2,7 @@
 
 Docker container to run a WSGI Python app using
 [Waitress](https://docs.pylonsproject.org/projects/waitress/en/stable/index.html). Images support python 3.6+ and are
-based on the [official python containers](). The `-slim` versions are based on the similarly named python versions.
+based on the [official python containers](https://hub.docker.com/_/python). The `-slim` versions are based on the similarly named python versions.
 
 [Pull from Docker Hub](https://hub.docker.com/r/tecktron/python-waitress/)
 
