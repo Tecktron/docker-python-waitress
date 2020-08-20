@@ -26,15 +26,23 @@ if [[ -v $WAITRESS_LISTEN ]]; then
   done
 else
   if [[ -v $WAITRESS_HOST ]]; then
-    params="--host=$WAITRESS_HOST"
-    if [[ -v $WAITRESS_PORT ]]; then
-      params=" $params --port=$WAITRESS_PORT"
+    if [[ -z $params ]]; then
+      params="--host=$WAITRESS_HOST"
     else
-      params=" $params --port=80"
+      params=" $params --host=$WAITRESS_HOST"
     fi
-  else
-    params="--listen=*:80"
   fi
+  if [[ -v $WAITRESS_PORT ]]; then
+    if [[ -z $params ]]; then
+      params="--port=$WAITRESS_PORT"
+    else
+      params=" $params --port=$WAITRESS_PORT"
+    fi
+  fi
+fi
+
+if [[ -z $params ]]; then
+    params="--listen=*:80"
 fi
 
 if [[ -v $WAITRESS_NO_IPV6 ]]; then

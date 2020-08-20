@@ -99,28 +99,28 @@ docker run -d -p 80:80 -e APP_MODULE="custom_app.custom_script:api" myimage
 ### Waitress Options
 
 #### Host & Port Setup
-By default, Waitress has been setup to server on all hostnames on port 80 using both IPv4 and IPv6. This translates to `--listen:*:80`. This works for most applications using the basic setups listed above.
+By default, Waitress has been setup to server on all hostnames on port 80 using both IPv4 and IPv6. This translates to `--listen=*:80`. This works for most applications using the basic setups listed above.
 
 You may have different needs so you can adjust and manipulate this by passing in environment variable to adjust the settings.
 
-There are 2 options for doing this:
+##### `WAITRESS_LISTEN`
 
+Pass a comma separated list of host:port (EG: `host:post,host:port,host:port`) to the `WAITRESS_LISTEN` param
 
-1. Pass a comma separated list of `host:port,host:port` to the `WAITRESS_LISTEN` param
-
-The `WAITRESS_LISTEN` param takes precedence over `WAITRESS_HOST`/`WAITRESS_PORT` options, meaning if you include all 3, host and port settings will be ignored.
-
-To set Waitress to use port 8080, sent the `WAITRESS_LISTEN` param like 
+To set Waitress to use port 8080, sent the `WAITRESS_LISTEN` param like
 ```bash
 docker run -d -p 80:8080 -e WAITRESS_LISTEN=*:8080 myimage
 ````
 
-2. Pass the host and port separately as `WAITRESS_HOST` and/or `WAITRESS_PORT`. If port is left out, it will default to 80.
+##### `WAITRESS_HOST` / `WAITRESS_PORT`
+Pass the host and port separately as `WAITRESS_HOST` and/or `WAITRESS_PORT`. If port is left out, it will default to 80.
 
 If you want only IPv4, you could use advanced param listed in the section below, but you could also use
 ```bash
 docker run -d -p 80:8080 -e WAITRESS_HOST=0.0.0.0 -e WAITRESS_PORT=8080 myimage
 ````
+
+**Note:** The `WAITRESS_LISTEN` param takes precedence over `WAITRESS_HOST` & `WAITRESS_PORT` options, meaning if you include all 3, `WAITRESS_HOST` & `WAITRESS_PORT` will be ignored.
 
 #### Advanced Options
 
