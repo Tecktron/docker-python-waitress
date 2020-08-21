@@ -47,7 +47,7 @@ The Python "module" (file) to be imported by Waitress, this module would contain
 
 By default:
 
-* `app.wsgi` if there's a file `/app/app/main.py` or
+* `app.wsgi` if there's a file `/app/app/wsgi.py` or
 * `wsgi` if there's a file `/app/wsgi.py`
 
 For example, if your main file was at `/app/custom_app/custom_script.py`, you could set it like:
