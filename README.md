@@ -135,6 +135,7 @@ in the environment. The supported options are:
 | WAITRESS_NO_EXPOSE_TRACEBACKS    | --no-expose-tracebacks           |
 | WAITRESS_NO_IPV6                 | --no-ipv6                        |
 | WAITRESS_NO_IPV4                 | --no-ipv4                        |
+| WAITRESS_CALL                    | --call                           |
 | WAITRESS_THREADS                 | --threads=`$VAL`                 |
 | WAITRESS_IDENT                   | --ident=`$VAL`                   |
 | WAITRESS_OUTBUF_OVERFLOW         | --outbuf_high_watermark=`$VAL`   |
