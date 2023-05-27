@@ -47,7 +47,7 @@ The Python "module" (file) to be imported by Waitress, this module would contain
 
 By default:
 
-* `app.wsgi` if there's a file `/app/app/main.py` or
+* `app.wsgi` if there's a file `/app/app/wsgi.py` or
 * `wsgi` if there's a file `/app/wsgi.py`
 
 For example, if your main file was at `/app/custom_app/custom_script.py`, you could set it like:
@@ -135,6 +135,7 @@ in the environment. The supported options are:
 | WAITRESS_NO_EXPOSE_TRACEBACKS    | --no-expose-tracebacks           |
 | WAITRESS_NO_IPV6                 | --no-ipv6                        |
 | WAITRESS_NO_IPV4                 | --no-ipv4                        |
+| WAITRESS_CALL                    | --call                           |
 | WAITRESS_THREADS                 | --threads=`$VAL`                 |
 | WAITRESS_IDENT                   | --ident=`$VAL`                   |
 | WAITRESS_OUTBUF_OVERFLOW         | --outbuf_high_watermark=`$VAL`   |

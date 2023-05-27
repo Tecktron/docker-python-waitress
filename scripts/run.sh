@@ -45,6 +45,9 @@ if [[ -z $params ]]; then
     params="--listen=*:80"
 fi
 
+if [[ -v $WAITRESS_CALL ]]; then
+  params=" $params --call"
+fi
 if [[ -v $WAITRESS_NO_IPV6 ]]; then
   params=" $params --no-ipv6"
 fi
