@@ -14,7 +14,7 @@ fi
 
 params=""
 
-if [[ -v $WAITRESS_LISTEN ]]; then
+if [[ -v WAITRESS_LISTEN ]]; then
   listeners=$(echo "$WAITRESS_LISTEN" | tr "," "\n")
   for listener in $listeners
   do
@@ -25,14 +25,14 @@ if [[ -v $WAITRESS_LISTEN ]]; then
     fi
   done
 else
-  if [[ -v $WAITRESS_HOST ]]; then
+  if [[ -v WAITRESS_HOST ]]; then
     if [[ -z $params ]]; then
       params="--host=$WAITRESS_HOST"
     else
       params=" $params --host=$WAITRESS_HOST"
     fi
   fi
-  if [[ -v $WAITRESS_PORT ]]; then
+  if [[ -v WAITRESS_PORT ]]; then
     if [[ -z $params ]]; then
       params="--port=$WAITRESS_PORT"
     else
@@ -45,49 +45,49 @@ if [[ -z $params ]]; then
     params="--listen=*:80"
 fi
 
-if [[ -v $WAITRESS_CALL ]]; then
+if [[ -v WAITRESS_CALL ]]; then
   params=" $params --call"
 fi
-if [[ -v $WAITRESS_NO_IPV6 ]]; then
+if [[ -v WAITRESS_NO_IPV6 ]]; then
   params=" $params --no-ipv6"
 fi
-if [[ -v $WAITRESS_NO_IPV4 ]]; then
+if [[ -v WAITRESS_NO_IPV4 ]]; then
   params=" $params --no-ipv4"
 fi
-if [[ -v $WAITRESS_EXPOSE_TRACEBACKS ]]; then
+if [[ -v WAITRESS_EXPOSE_TRACEBACKS ]]; then
   params=" $params --expose-tracebacks"
 fi
-if [[ -v $WAITRESS_NO_EXPOSE_TRACEBACKS ]]; then
+if [[ -v WAITRESS_NO_EXPOSE_TRACEBACKS ]]; then
   params=" $params --no-expose-tracebacks"
 fi
-if [[ -v $WAITRESS_THREADS ]]; then
+if [[ -v WAITRESS_THREADS ]]; then
   params=" $params --thread=$WAITRESS_THREADS"
 fi
-if [[ -v $WAITRESS_IDENT ]]; then
+if [[ -v WAITRESS_IDENT ]]; then
   params=" $params --ident=$WAITRESS_IDENT"
 fi
-if [[ -v $WAITRESS_OUTBUF_OVERFLOW ]]; then
+if [[ -v WAITRESS_OUTBUF_OVERFLOW ]]; then
   params=" $params --outbuf_overflow=$WAITRESS_OUTBUF_OVERFLOW"
 fi
-if [[ -v $WAITRESS_OUTBUF_HIGH_WATERMARK ]]; then
+if [[ -v WAITRESS_OUTBUF_HIGH_WATERMARK ]]; then
   params=" $params --outbuf_high_watermark=$WAITRESS_OUTBUF_HIGH_WATERMARK"
 fi
-if [[ -v $WAITRESS_INBUF_OVERFLOW ]]; then
+if [[ -v WAITRESS_INBUF_OVERFLOW ]]; then
   params=" $params --inbuf_overflow=$WAITRESS_INBUF_OVERFLOW"
 fi
-if [[ -v $WAITRESS_CONNECTION_LIMIT ]]; then
+if [[ -v WAITRESS_CONNECTION_LIMIT ]]; then
   params=" $params --connection_limit=$WAITRESS_CONNECTION_LIMIT"
 fi
-if [[ -v $WAITRESS_MAX_REQUEST_HEADER_SIZE ]]; then
+if [[ -v WAITRESS_MAX_REQUEST_HEADER_SIZE ]]; then
   params=" $params --max_request_header_size=$WAITRESS_MAX_REQUEST_HEADER_SIZE"
 fi
-if [[ -v $WAITRESS_MAX_REQUEST_BODY_SIZE ]]; then
+if [[ -v WAITRESS_MAX_REQUEST_BODY_SIZE ]]; then
   params=" $params --max_request_body_size=$WAITRESS_MAX_REQUEST_BODY_SIZE"
 fi
-if [[ -v $WAITRESS_ASYNCORE_LOOP_TIMEOUT ]]; then
+if [[ -v WAITRESS_ASYNCORE_LOOP_TIMEOUT ]]; then
   params=" $params --asyncore_loop_timeout=$WAITRESS_ASYNCORE_LOOP_TIMEOUT"
 fi
-if [[ -v $WAITRESS_ASYNCORE_USE_POLL ]]; then
+if [[ -v WAITRESS_ASYNCORE_USE_POLL ]]; then
   params=" $params --asyncore_use_poll=$WAITRESS_ASYNCORE_USE_POLL"
 fi
 
