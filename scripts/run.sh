@@ -12,7 +12,7 @@ else
     echo "There is no script $PRE_START_PATH"
 fi
 
-params=""
+params="$WAITRESS_EXTRA_PARAMS"
 
 if [[ -v WAITRESS_LISTEN ]]; then
   listeners=$(echo "$WAITRESS_LISTEN" | tr "," "\n")

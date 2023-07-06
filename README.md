@@ -165,6 +165,8 @@ Translates to command
 waitress-serve --listen=*:80 --no-ipv6 app.wsgi:application
 ```
 
+Additional extra parameters can passed setting `WAITRESS_EXTRA_PARAMS` environment variable.
+
 # Credits
 This dockerfile setup is based on https://github.com/tiangolo/meinheld-gunicorn-docker
 
