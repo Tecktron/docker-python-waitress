@@ -1,4 +1,5 @@
-FROM python:latest
+ARG PYTHON_TAG=latest
+FROM python:${PYTHON_TAG}
 
 RUN pip install pip waitress --upgrade
 
